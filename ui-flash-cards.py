@@ -34,7 +34,7 @@ def generate_flashcards(docs):
     return {}
 
 def main(page: ft.Page):
-    page.title = "Flashcards Maker"
+    page.title = "Flashcards Generator using RAG"
     page.theme_mode = ft.ThemeMode.LIGHT
     page.padding = 20
     page.window_width = 600
@@ -49,19 +49,12 @@ def main(page: ft.Page):
     page.add(
         ft.Column([
             ft.Text(
-                "Interactive Flashcard Generator",
+                "Flashcards Generator",
                 size=30,
                 weight=ft.FontWeight.BOLD,
                 color=ft.colors.ORANGE,
                 text_align=ft.TextAlign.CENTER
             ),
-            ft.Text(
-                "Upload a PDF file to generate interactive flashcards",
-                size=16,
-                italic=True,
-                color=ft.colors.GREY,
-                text_align=ft.TextAlign.CENTER
-            )
         ],
         spacing=5,
         alignment=ft.MainAxisAlignment.CENTER)
