@@ -2,7 +2,7 @@ import flet as ft
 import os
 import json
 import ast
-import RAG as rag  # Your backend logic
+import RAG as rag  
 
 def load(file_path):
     docs = rag.load_and_chunk(file_path)
@@ -47,7 +47,7 @@ def main(page: ft.Page):
     flipped = False
 
     page.add(
-        ft.Column([
+        ft.Column([ 
             ft.Text(
                 "Flashcards Generator",
                 size=30,
@@ -62,7 +62,10 @@ def main(page: ft.Page):
 
     def file_picker_result(e: ft.FilePickerResultEvent):
         if e.files:
-            file_paths.value = e.files[0].path
+            # Convert absolute path to relative path
+            absolute_path = os.path.abspath(e.files[0].path)
+            relative_path = os.path.relpath(absolute_path)  # Convert to relative path
+            file_paths.value = relative_path.replace("\\", "/")  # Ensure forward slashes in path
             file_name.value = e.files[0].name
             page.update()
 
@@ -73,11 +76,8 @@ def main(page: ft.Page):
     file_name = ft.Text(size=14, color=ft.colors.GREY)
 
     flashcard_container = ft.Container(
-        content=ft.Column([
-            ft.Text("Select a PDF file to start",
-                    size=18,
-                    color=ft.colors.GREY,
-                    text_align=ft.TextAlign.CENTER)
+        content=ft.Column([ 
+            ft.Text("Select a PDF file to start", size=18, color=ft.colors.GREY, text_align=ft.TextAlign.CENTER)
         ], alignment=ft.MainAxisAlignment.CENTER),
         width=500,
         height=300,
@@ -96,11 +96,8 @@ def main(page: ft.Page):
     def update_flashcard_display():
         nonlocal flashcards, current_index, flipped
         if not flashcards:
-            flashcard_container.content = ft.Column([
-                ft.Text("No flashcards available",
-                        size=18,
-                        color=ft.colors.GREY,
-                        text_align=ft.TextAlign.CENTER)
+            flashcard_container.content = ft.Column([ 
+                ft.Text("No flashcards available", size=18, color=ft.colors.GREY, text_align=ft.TextAlign.CENTER)
             ], alignment=ft.MainAxisAlignment.CENTER)
             counter_text.value = ""
             next_button.disabled = True
@@ -108,13 +105,13 @@ def main(page: ft.Page):
         else:
             question, answer = flashcards[current_index]
             if flipped:
-                flashcard_container.content = ft.Column([
+                flashcard_container.content = ft.Column([ 
                     ft.Text("Answer:", size=16, color=ft.colors.GREY),
                     ft.Container(content=ft.Text(answer, size=20, color=ft.colors.BLACK), padding=10)
                 ], alignment=ft.MainAxisAlignment.CENTER)
                 flashcard_container.bgcolor = ft.colors.GREEN_50
             else:
-                flashcard_container.content = ft.Column([
+                flashcard_container.content = ft.Column([ 
                     ft.Text("Question:", size=16, color=ft.colors.GREY),
                     ft.Container(content=ft.Text(question, size=20, color=ft.colors.BLACK, weight=ft.FontWeight.BOLD), padding=10)
                 ], alignment=ft.MainAxisAlignment.CENTER)
@@ -139,11 +136,8 @@ def main(page: ft.Page):
                 flipped = False
                 update_flashcard_display()
             else:
-                flashcard_container.content = ft.Column([
-                    ft.Text("No valid flashcards generated",
-                            size=18,
-                            color=ft.colors.RED,
-                            text_align=ft.TextAlign.CENTER)
+                flashcard_container.content = ft.Column([ 
+                    ft.Text("No valid flashcards generated", size=18, color=ft.colors.RED, text_align=ft.TextAlign.CENTER)
                 ], alignment=ft.MainAxisAlignment.CENTER)
                 page.update()
 
