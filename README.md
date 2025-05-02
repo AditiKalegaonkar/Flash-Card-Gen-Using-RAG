@@ -5,3 +5,19 @@ Flash-Card-Gen-Using-RAG is a project that leverages HuggingFace endpoints and R
 ![UI Image](Image/image.png)
 
 The above UI is made using FLET in python. The prompt for the model is defined in such way that model only outputs the question and answers in the form of dictionary,questions are keys and values are answers. One can touch the flash card to flip it to know the answer. 
+
+
+### Installation guide
+
+~~~s
+pip install requirements.txt
+~~~
+
+make .env and add your hugging face api key in it 
+
+~~~s
+HUGGING_FACE_API_KEY = "<your_api_key>"
+~~~
+
+Feel free to try and suggestions are always welcome!!
+
