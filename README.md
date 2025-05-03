@@ -22,7 +22,7 @@ HUGGING_FACE_API_KEY = "<your_api_key>"
 ### Demo Video 
 Flash cards generated for pdf containing information about AI-agents
 
-![Demo Video](Media/Demo_Video.mp4)
+[Video](Media/Video.mp4)
 
 Feel free to try and suggestions are always welcome!!
 
