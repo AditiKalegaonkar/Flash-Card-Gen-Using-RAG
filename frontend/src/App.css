@@ -1,0 +1,367 @@
+:root {
+  --navy: #161E54;
+  --soft-blue: #BBE0EF;
+  --burnt-orange: #F16D34;
+  --peach: #FF986A;
+  --white: #ffffff;
+  --bg-color: #F0F4F8; /* Slightly darker for better contrast */
+  --card-shadow: 0 20px 40px -5px rgba(22, 30, 84, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--navy);
+  min-height: 100vh;
+  /* Subtle background pattern */
+  background-image: radial-gradient(#E1E8ED 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* --- Layout Structure --- */
+.navbar {
+  width: 100%;
+  background-color: var(--white);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-brand {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-brand span {
+  color: var(--burnt-orange);
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 1rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer {
+  text-align: center;
+  padding: 2rem;
+  color: var(--navy);
+  opacity: 0.6;
+  font-size: 0.85rem;
+  background-color: var(--white);
+  border-top: 1px solid #e2e8f0;
+}
+
+/* --- File Status Badge (in Navbar) --- */
+.file-status-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: #F8FAFC;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  font-size: 0.85rem;
+}
+
+.file-name {
+  font-weight: 600;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.btn-reset-small {
+  background: none;
+  border: none;
+  color: var(--burnt-orange);
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.btn-reset-small:hover {
+  text-decoration: underline;
+}
+
+/* --- Landing Page / Upload Section --- */
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+
+.headline {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.subheadline {
+  font-size: 1.1rem;
+  color: #64748b;
+  margin-bottom: 3rem;
+  max-width: 480px;
+}
+
+.upload-card {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-shadow: var(--card-shadow);
+  width: 100%;
+}
+
+.drop-zone {
+  border: 2px dashed var(--soft-blue);
+  background-color: #F8FDFF;
+  border-radius: 1rem;
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 1.5rem;
+}
+
+.drop-zone:hover {
+  background-color: #EBF7FF;
+  border-color: var(--burnt-orange);
+}
+
+.file-input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--burnt-orange);
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.1s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background-color: #e05d25;
+}
+
+.btn-primary:disabled {
+  background-color: #cbd5e1;
+  cursor: not-allowed;
+}
+
+/* --- Flashcard Workspace --- */
+.workspace-container {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background-color: #cbd5e1;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--burnt-orange);
+  transition: width 0.3s ease;
+}
+
+/* 3D Card Styling */
+.card-container {
+  perspective: 1500px;
+  width: 100%;
+  height: 450px; /* Increased height for content */
+  margin-bottom: 2rem;
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.card-front {
+  background-color: var(--white);
+  color: var(--navy);
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+.card-back {
+  background-color: var(--navy);
+  color: white;
+  transform: rotateY(180deg);
+  align-items: flex-start; /* Align top-left */
+  text-align: left;        /* Align text left */
+  padding: 2rem;
+}
+
+.card-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  opacity: 0.7;
+  display: block;
+}
+
+/* Scrollable Content Area */
+.card-content-scroll {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  padding-right: 10px; /* Space for scrollbar */
+  font-size: 1.25rem;
+  line-height: 1.6;
+}
+
+/* Custom Scrollbar for Card Back */
+.card-content-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.card-content-scroll::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+.card-content-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+.card-content-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Navigation Buttons */
+.controls {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.nav-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  background: white;
+  color: var(--navy);
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.nav-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.nav-btn.primary {
+  background-color: var(--burnt-orange);
+  color: white;
+}
+
+.nav-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+  transform: none;
+}
+
+.card-counter {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.helper-text {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
