@@ -1,6 +1,6 @@
 # Flash-Card-Gen-Using-RAG
 
-Flash-Card-Gen-Using-RAG is a web application that leverages Retrieval-Augmented Generation (RAG) to automatically generate study flashcards from PDF documents. By extracting key information and generating question-answer pairs, it aids in efficient learning and quick revision.
+Flash-Card-Gen-Using-RAG is a project that leverages Gemini endpoints and Retrieval-Augmented Generation (RAG) to automatically generate flashcards from user-provided PDF documents. By extracting key information and generating question-answer pairs, it aids in efficient learning and quick revision.
 
 This project uses a 3-Tier Architecture featuring a React Frontend, Node.js Middleware, and a Python/FastAPI AI Service.
 
