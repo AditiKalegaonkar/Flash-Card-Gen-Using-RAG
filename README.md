@@ -93,5 +93,6 @@ npm run dev
 
 ### Demo Video
 
+https://github.com/user-attachments/assets/9e5b8bf2-fcd2-4afb-89d6-248336c7ceca
 
 Feel free to try it out! Suggestions and contributions are always welcome.
