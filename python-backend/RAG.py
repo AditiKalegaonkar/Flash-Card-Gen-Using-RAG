@@ -2,9 +2,10 @@
 from langchain_community.vectorstores import FAISS
 from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
 from langchain_community.document_loaders import PyPDFLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.prompts import PromptTemplate
-from langchain.chains import RetrievalQA
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_core.prompts import PromptTemplate
+from langchain_core.runnables import RunnablePassthrough
+from langchain_core.output_parsers import StrOutputParser
 import os
 from dotenv import load_dotenv
 
@@ -22,7 +23,8 @@ def load_and_chunk(path):
 
 
 def pipeline(docs):
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
+    embeddings = GoogleGenerativeAIEmbeddings(
+        model="models/gemini-embedding-001")
 
     db = FAISS.from_documents(docs, embeddings)
     print("Embedded succesfully")
@@ -66,16 +68,17 @@ def pipeline(docs):
         input_variables=["context"],
         input_type=str
     )
-
-    retrievalQA = RetrievalQA.from_chain_type(
-        llm=llm,
-        chain_type="stuff",
-        retriever=retriever,
-        return_source_documents=True,
-        chain_type_kwargs={"prompt": prompt}
+    rag_chain = (
+        {
+            "context": retriever,
+            "user_question": RunnablePassthrough()
+        }
+        | prompt
+        | llm
+        | StrOutputParser()
     )
 
-    result = retrievalQA.invoke(
+    result = rag_chain.invoke(
         "Create a dictionary datatype of important definitions and questions as a key and answer as value.")
 
-    return result['result']
+    return result

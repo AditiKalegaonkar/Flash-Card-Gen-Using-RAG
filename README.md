@@ -4,17 +4,17 @@ Flash-Card-Gen-Using-RAG is a project that leverages Gemini endpoints and Retrie
 
 This project uses a 3-Tier Architecture featuring a React Frontend, Node.js Middleware, and a Python/FastAPI AI Service.
 
-### System Architecture
+## System Architecture
 
 The application is split into three distinct layers to ensure scalability and separation of concerns:
 
 ![Architecture Image](frontend/Media/architecture.png)
 
-### Installation & Setup Guide
+## Installation & Setup Guide
 
 This project requires three terminal windows to run the separate services.
 
-#### Step 1: Configure AI Service (Python)
+### Step 1: Configure AI Service (Python)
 
 1. Navigate to the AI service directory:
 ```bash
@@ -27,8 +27,54 @@ cd python-backend
 GOOGLE_API_KEY="<your_api_key>"
 
 ```
+3. Create virtual environment
+For **Windows**:
 
-3. Install dependencies:
+#### Create virtual environment
+
+```bat
+python -m venv .venv
+```
+
+#### Activate (Command Prompt)
+
+```bat
+.venv\Scripts\activate
+```
+
+#### Activate (PowerShell)
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+#### Deactivate
+
+```bat
+deactivate
+```
+
+For **macOS and Linux**:
+
+#### Create virtual environment
+
+```bash
+python3 -m venv .venv
+```
+
+#### Activate
+
+```bash
+source .venv/bin/activate
+```
+
+#### Deactivate
+
+```bash
+deactivate
+```
+
+4. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
@@ -39,7 +85,7 @@ python -m uvicorn main:app --reload --port 8000
 
 ```
 
-#### Step 2: Configure Backend (Node.js)
+### Step 2: Configure Backend (Node.js)
 
 1. Open a new terminal and navigate to the backend:
 ```bash
@@ -60,7 +106,7 @@ node server.js
 ```
 
 
-#### Step 3: Configure Frontend (React)
+### Step 3: Configure Frontend (React)
 
 1. Open a third terminal and navigate to the frontend:
 ```bash
@@ -82,7 +128,7 @@ npm run dev
 
 4. Open the link shown (usually `http://localhost:5173`) in your browser.
 
-### Usage
+## Usage
 
 1. **Upload:** Click "Browse PDF" to select your study material.
 2. **Generate:** Click the "Generate Flashcards" button.
@@ -91,7 +137,7 @@ npm run dev
 * Use the Arrow Keys or on-screen buttons to navigate between cards.
 
 
-### Demo Video
+## Demo Video
 
 
 Feel free to try it out! Suggestions and contributions are always welcome.
